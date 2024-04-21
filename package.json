@@ -9,6 +9,7 @@
     "test": "ng test",
     "build:href": "ng build --base-href ./",
     "copy:dist": "copyfiles dist/game-room/browser/* ./docs -f",
+    "copy:assets": "copyfiles src/assets/* ./docs/assets -f",
     "build:github": "rm -Rf ./docs && npm run build:href && npm run copy:dist"
   },
   "private": true,
