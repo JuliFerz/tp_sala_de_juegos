@@ -1,18 +1,24 @@
-<div class="profile-card w-100 rounded-4 d-block position-relative p-4 fw-bold mt-5">
+<div class="p-3 mt-12 rounded-2xl profile-card shadow-2xl shadow-gray-700 border-l-8 select-none relative">
   <shared-card-header [title]="'Datos personales'" />
-  <div class="row">
-    <div class="col-5 d-flex justify-content-center align-items-center">
-      <img src="/assets/profilepic_sensei.png" width="150" height="150" class="profile-picture">
+  <div class="grid grid-cols-12 text-2xl mt-5">
+    <div class="col-span-5">
+      <p class="text-center font-bold profile-title">FOTO DE PERFIL</p>
+      <div class="col-span-5 flex justify-center align-middle items-center mt-3 mb-2">
+        <img src="/assets/profilepic_sensei.png" class="w-48 h-48 rounded-full border-2  border-blue-900 pointer-events-none">
+        <!-- <img src="/assets/profile_pic.jpg" class="w-48 h-48 rounded-full border-2  border-blue-900 pointer-events-none"> -->
+      </div>
     </div>
-    <div class="col-7">
-      <div class="row">
-        <div class="col-2">
+
+    <div class="col-span-7 text-2xl font-semibold">
+      <p class="text-center font-bold -translate-x-32 profile-title">DATOS</p>
+      <div class="grid grid-cols-8 mt-3 mb-2">
+        <div class="col-span-2 p-3">
           <p>NOMBRE:</p>
           <p>EDAD:</p>
           <p>EMAIL:</p>
           <p>PAIS:</p>
         </div>
-        <div class="col-6">
+        <div class="col-span-6 p-3">
           <p>Julian Fernandez</p>
           <p>23</p>
           <p>julianfernandez1811&#64;gmail.com</p>
@@ -23,38 +29,51 @@
   </div>
 </div>
 
-<div class="profile-card w-100 rounded-4 d-block position-relative p-4 fw-bold mt-5">
+<div class="p-7 mt-16 rounded-2xl profile-card shadow-2xl shadow-gray-700 border-l-8 select-none relative">
   <shared-card-header [title]="'Explicación del juego'" />
-  <h4 class="text-center fw-bolder text-uppercase">¡Adivina mi numero!</h4>
+  <p class="text-center font-extrabold text-3xl p-2 profile-title">¡ADIVINA MI NUMERO!</p>
   <hr>
-  <div class="row">
-    <div class="col-9">
-      <h5 class="text-center fw-bolder text-uppercase">Explicación</h5>
-      <p>
-        Se trata de un juego donde se le dará al jugador un numero aleatorio oculto entre 1 a 20. El objetivo del juego
-        es adivinar qué numero es en la menor cantidad de intentos posible.</p>
-      <p>
-        Al acertar el número, cuanto menor sea la cantidad de intentos que se realizó, más puntaje recibirá el jugador.
+  <div class="grid grid-cols-12">
+    <div class="col-span-7 mt-4">
+      <p class="text-center font-bold text-2xl profile-subtitle">
+        EXPLICACIÓN
       </p>
-      <p>Por cada intento que se hará, la pantalla mostrará algunos de los siguientes tres estados:</p>
-      <ul>
-        <li>📉 ¡Demasiado bajo!</li>
-        <p class="mx-lg-4">Se dará cuando el numero elegido está por debajo del numero aleatorio generado</p>
-        <li>📈 ¡Demasiado alto!</li>
-        <p class="mx-lg-4">Se dará cuando el numero elegido está por encima del numero aleatorio generado</p>
-        <li>✅ ¡Correcto!</li>
-        <p class="mx-lg-4">Se dará cuando el numero elegido es igual al número aleatorio generado</p>
-      </ul>
-
-
-      <h5 class="text-center fw-bolder text-uppercase mt-5">Sistema de puntuación</h5>
-      <p>
-        Se aplicará la siguiente fórmula para calcular el puntaje: puntaje_maximo * (cantidad_intentos / puntaje_maximo)
+      <div class="font-semibold text-xl mt-2">
+        <p>
+          Se trata de un juego donde se le dará al jugador un numero aleatorio oculto entre 1 a 20. El objetivo del
+          juego
+          es adivinar qué numero es en la menor cantidad de intentos posible.</p>
+        <p class="mt-10">
+          Al acertar el número, cuanto menor sea la cantidad de intentos que se realizó, más puntaje recibirá el
+          jugador.
+        </p>
+        <p class="mt-10">Por cada intento que se hará, la pantalla mostrará algunos de los siguientes tres estados:</p>
+        <ul class="mt-3">
+          <li class="font-extrabold">📉 "¡Demasiado bajo!"</li>
+          <p class="font-extralight text-lg italic">Se dará cuando el numero elegido está por debajo del numero
+            aleatorio generado</p>
+          <li class="font-extrabold mt-3">📈 "¡Demasiado alto!"</li>
+          <p class="font-extralight text-lg italic">Se dará cuando el numero elegido está por encima del numero
+            aleatorio generado</p>
+          <li class="font-extrabold mt-3">✅ "¡Correcto!"</li>
+          <p class="font-extralight text-lg italic">Se dará cuando el numero elegido es igual al número aleatorio
+            generado</p>
+        </ul>
+      </div>
+      <p class="text-center font-bold text-2xl profile-subtitle mt-14">
+        SISTEMA DE PUNTUACIÓN
       </p>
-      <p>La cantidad de puntaje máximo será un valor seteado en 10.</p>
+      <div class="font-semibold text-xl mt-2">
+        <p>Se aplicará la siguiente fórmula para calcular el puntaje: </p>
+        <p class="font-light text-lg italic">
+          puntaje_maximo * (cantidad_intentos / puntaje_maximo)
+        </p>
+        <p class="mt-5">La cantidad de puntaje máximo será un valor seteado en 10.</p>
+      </div>
     </div>
-    <div class="col-3 d-flex justify-content-center align-items-center">
-      <img src="/assets/gameRoomFull_icon.png" width="150" height="150">
+
+    <div class="col-span-5 flex justify-center items-center">
+      <img src="/assets/gameRoomFull_icon.png" class="w-72 h-72 pointer-events-none">
     </div>
   </div>
 </div>

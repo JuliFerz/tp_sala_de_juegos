@@ -1,9 +1,13 @@
 .profile-card {
-  box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.671);
-  background: linear-gradient(148deg, rgb(0, 85, 196) 0%, rgb(164, 46, 255)50%, rgba(146, 0, 187, 0.781) 100%);
-  color: #000000;
+  background: linear-gradient(150deg, rgba(15,15,162,1) 0%, rgba(0,0,0,1) 100%);
+  border-color: #6b84ff;
+  color:#ebf1ff;
 }
 
-.profile-picture {
-  border-radius: 100%;
+.profile-title {
+  color: #fd8e30;
+}
+
+.profile-subtitle {
+  color: #ffd8a9;
 }
