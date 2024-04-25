@@ -1,0 +1,39 @@
+<div class="p-1 mt-16">
+  <p class="text-5xl text-center text-white">Sala de Juegos</p>
+
+  <div class="flex justify-center">
+
+    <div class="p-10 bg-slate-700 mt-10 w-full rounded-2xl flex justify-center">
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="w-1/2">
+        <div class="grid grid-rows-3 gap-5">
+          <div>
+            <p class="text-xl font-bold text-white">Correo</p>
+            <input type="email" class="form-control shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight"  formControlName="email" placeholder="Escriba su correo">
+
+            <span *ngIf="isValidField('email')" class="text-red-500">
+              {{ getFieldError('email') }}
+            </span>
+          </div>
+
+          <div>
+            <p class="text-xl font-bold text-white">Contraseña</p>
+            <input type="password" class="form-control shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight"  formControlName="password" placeholder="Escriba su contraseña">
+
+            <span *ngIf="isValidField('password')" class="text-red-500">
+              {{ getFieldError('password') }}
+            </span>
+          </div>
+
+          <div>
+            <button type="submit" class="bg-slate-400 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg">
+              Enviar
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

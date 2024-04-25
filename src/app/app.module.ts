@@ -5,7 +5,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './modules/home/home.module';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -15,9 +19,24 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    SharedModule,
+    provideFirebaseApp(() => initializeApp(
+      {
+        "projectId": "labo-iv-13b4d",
+        "appId": "1:430963226621:web:eb22e48eea4b077f678b94",
+        "storageBucket": "labo-iv-13b4d.appspot.com",
+        "apiKey": "AIzaSyB7yAPqU4_0cd6gem6JRXVpx-GfpIWTLo4",
+        "authDomain": "labo-iv-13b4d.firebaseapp.com",
+        "messagingSenderId": "430963226621"
+      })
+    ),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [
+    /* {provide: LocationStrategy, useClass: HashLocationStrategy}, */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

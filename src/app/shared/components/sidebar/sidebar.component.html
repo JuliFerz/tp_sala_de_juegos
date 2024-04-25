@@ -1,0 +1,35 @@
+<div class="bg-slate-700 border-solid border-2 border-slate-500 w-72 h-screen">
+  <div class="flex justify-center items-center bg-slate-800 border-solid border-2 border-slate-500 h-16">
+    <p class="text-2xl font-bold text-gray-200">Julian Fernandez</p>
+  </div>
+  <div class="flex justify-center text-center p-2">
+    <div class="p-3 text-2xl text-slate-200 italic font-light">Sala de juegos</div>
+  </div>
+
+  <div class="flex flex-col justify-center text-center p-2 mt-5">
+    <!-- <button *ngFor="let item of menuItems"
+        class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4"
+        [routerLink]="[item.route]"
+        routerLinkActive="active">
+      <p class="text-2xl text-slate-200">{{ item.title }}</p>
+    </button> -->
+    @if(authService.getCurrentUser() === null){
+    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="login" routerLinkActive="active">
+      <p class="text-2xl text-slate-200">Conectarse</p>
+    </button>
+    }
+    @if(authService.getCurrentUser() !== null){
+    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="home" routerLinkActive="active">
+      <p class="text-2xl text-slate-200">Principal</p>
+    </button>
+    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="auth/logout" routerLinkActive="active">
+      <p class="text-2xl text-slate-200">Desconectarse</p>
+    </button>
+    }
+    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="profile"
+      routerLinkActive="active">
+      <p class="text-2xl text-slate-200">Quien Soy</p>
+    </button>
+  </div>
+
+</div>
