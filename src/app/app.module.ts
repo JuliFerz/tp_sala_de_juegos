@@ -1,4 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -6,10 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './modules/home/home.module';
 import { SharedModule } from './shared/shared.module';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     provideFirestore(() => getFirestore())
   ],
   providers: [
-    /* {provide: LocationStrategy, useClass: HashLocationStrategy}, */
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })
