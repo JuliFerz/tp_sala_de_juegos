@@ -1,0 +1,103 @@
+.ahorcado, .mayor-menor, .preguntados, .adivina-mi-numero {
+  background-image: url('/assets/games/ahorcado.jpg');
+  background-position: center;
+  animation-name: bgZoomOut;
+  animation-duration: .1s;
+  animation-fill-mode: both;
+}
+
+.ahorcado {
+  background-image: url('/assets/games/ahorcado.jpg');
+}
+
+.mayor-menor {
+  background-image: url('/assets/games/mayor-menor.jpg');
+}
+
+.preguntados {
+  background-image: url('/assets/games/preguntados.jpg');
+}
+
+.adivina-mi-numero {
+  background-image: url('/assets/games/adivina-mi-numero.jpg');
+}
+
+.ahorcado:hover, .mayor-menor:hover, .preguntados:hover, .adivina-mi-numero:hover {
+  animation-name: bgZoomIn;
+  animation-duration: .1s;
+  animation-fill-mode: both;
+}
+@keyframes bgZoomIn {
+  0% {
+    background-size: cover;
+    filter: blur(0px);
+  }
+  10% {
+    background-size: 102%;
+  }
+  20% {
+    background-size: 104%;
+  }
+  30% {
+    background-size: 106%;
+  }
+  40% {
+    background-size: 108%;
+  }
+  50% {
+    background-size: 110%;
+  }
+  60% {
+    background-size: 112%;
+  }
+  70% {
+    background-size: 114%;
+  }
+  80% {
+    background-size: 116%;
+  }
+  90% {
+    background-size: 118%;
+  }
+  100% {
+    background-size: 120%;
+    filter: blur(2px);
+  }
+}
+@keyframes bgZoomOut {
+  0% {
+    background-size: 120%;
+    filter: blur(2px);
+  }
+  10% {
+    background-size: 118%;
+  }
+  20% {
+    background-size: 116%;
+  }
+  30% {
+    background-size: 114%;
+  }
+  40% {
+    background-size: 112%;
+  }
+  50% {
+    background-size: 110%;
+  }
+  60% {
+    background-size: 108%;
+  }
+  70% {
+    background-size: 106%;
+  }
+  80% {
+    background-size: 104%;
+  }
+  90% {
+    background-size: 102%;
+  }
+  100% {
+    background-size: cover;
+    filter: blur(0px);
+  }
+}

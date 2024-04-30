@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent {
-  public loginForm: FormGroup = this.fb.group({
+export class RegisterComponent {
+  public registerForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -27,14 +27,14 @@ export class LoginComponent {
 
 
   isValidField(field: string): boolean | null {
-    return this.loginForm.controls[field].errors
-      && this.loginForm.controls[field].touched;
+    return this.registerForm.controls[field].errors
+      && this.registerForm.controls[field].touched;
   }
 
   getFieldError(field: string): string | null {
-    if (!this.loginForm.controls[field]) return null;
+    if (!this.registerForm.controls[field]) return null;
 
-    const errors = this.loginForm.controls[field].errors || {};
+    const errors = this.registerForm.controls[field].errors || {};
 
     for (const key of Object.keys(errors)) {
       switch (key) {
@@ -49,47 +49,43 @@ export class LoginComponent {
     return null;
   }
 
-  setUser(user: string) {
-    switch (user) {
-      case 'test':
-        this.loginForm.setValue({ 'email': 'test@test.com', 'password': 'test123' });
-        break;
-      case 'maria':
-        this.loginForm.setValue({ 'email': 'mmercedes@test.com', 'password': 'maria123' });
-        break;
-    }
-  }
-
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
-  toRegister(): void {
-    this.router.navigateByUrl('auth/register');
+  toLogin(): void {
+    this.router.navigateByUrl('auth/login');
   }
 
-  onLogin(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+  onRegister(): void {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
       return;
     }
 
-    this.authService.login(this.loginForm.value)
+    this.authService.register(this.registerForm.value)
       .then(res => {
         Swal.fire({
-          title: "¡Usuario encontrado!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
+          title: "¡Usuario creado con éxito!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
         }).then((result) => {
           if (result.isConfirmed) {
-            this.authService.saveLogin(res.user);
-            this.loginForm.reset({ email: '', password: '' });
             this.router.navigateByUrl('/home');
           }
         });
       }).catch(err => {
-        this.errorMessage = err;
+        switch (err.code) {
+          case 'auth/email-already-in-use':
+            this.errorMessage = 'El correo ingresado ya se encuentra en uso.'
+            break;
+          default:
+            this.errorMessage = err;
+            break;
+        }
+
         Swal.fire({
-          title: 'Error!', text: `Las credenciales son inválidas.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
+          title: 'Error!', text: `Hubo un error al intentar crear el usuario.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
         })
       })
+    this.registerForm.reset({ email: '', password: '' });
   }
 }

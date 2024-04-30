@@ -2,8 +2,13 @@
   <div class="flex justify-center items-center bg-slate-800 border-solid border-2 border-slate-500 h-16">
     <p class="text-2xl font-bold text-gray-200">Julian Fernandez</p>
   </div>
-  <div class="flex justify-center text-center p-2">
-    <div class="p-3 text-2xl text-slate-200 italic font-light">Sala de juegos</div>
+  <div class="flex justify-center text-center p-2 mt-5">
+    @if(authService.getCurrentUser() !== null){
+      <p class="p-3 text-2xl bg-slate-600 rounded-xl text-slate-200 italic font-light select-none">{{ authService.getCurrentUser()?.email }}</p>
+    }
+    @else {
+      <p class="p-3 text-2xl text-slate-200 italic font-light">Sala de juegos</p>
+    }
   </div>
 
   <div class="flex flex-col justify-center text-center p-2 mt-5">
@@ -22,7 +27,8 @@
     <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="home" routerLinkActive="active">
       <p class="text-2xl text-slate-200">Principal</p>
     </button>
-    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="auth/logout" routerLinkActive="active">
+    <!-- <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="auth/logout" routerLinkActive="active"> -->
+    <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" (click)="logout()">
       <p class="text-2xl text-slate-200">Desconectarse</p>
     </button>
     }
