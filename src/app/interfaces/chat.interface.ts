@@ -4,5 +4,6 @@ export interface ChatInterface {
   email: string;
   username: string;
   message: string;
-  date?: Timestamp;
+  date: string;
+  id?: number;
 }

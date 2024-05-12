@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   public chatForm: FormGroup = this.fb.group(
     { message: ['', []] }
   );
+  public lastChatId!: number;
   public userLogged!: User;
 
   constructor(
@@ -24,27 +25,12 @@ export class ChatComponent implements OnInit {
   ) { }
 
 
-  returnTimeString(timestamp: Timestamp): string {
-    const date = this.convertToDate(timestamp)
+  returnTimeString(dateString: string): string {
+    const date = new Date(dateString);
 
     const hora = date.getHours();
     const minutos = date.getMinutes().toString().padStart(2, '0');
-    return `${hora}:${minutos}`
-  }
-
-  private convertToDate(timestamp: Timestamp): Date {
-    const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000;
-    return new Date(milliseconds);
-  }
-
-  ngOnInit(): void {
-    getAuth().onAuthStateChanged(user => user ? this.userLogged = user : '');
-    this.chatService.getChats()
-      .subscribe({
-        next: (res) => {
-          this.chats = res as ChatInterface[];
-        }
-      });
+    return `${hora}:${minutos}`;
   }
 
   onSendMessage(): void {
@@ -56,8 +42,31 @@ export class ChatComponent implements OnInit {
     this.chatService.saveMessage({
       email: this.userLogged.email!,
       username: this.userLogged.displayName!,
-      message: message
+      message: message,
+      date: new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }),
+      id: this.lastChatId
     })
+  }
+
+  ngOnInit(): void {
+    getAuth().onAuthStateChanged(user => user ? this.userLogged = user : '');
+    this.chatService.getChats()
+      .subscribe({
+        next: (res) => {
+          this.chats = res as ChatInterface[];
+        }
+      });
+
+    this.chatService.getLastChatId()
+      .subscribe({
+        next: (chat) => {
+          if (!chat[0]) {
+            this.lastChatId = 1;
+          } else {
+            this.lastChatId = chat[0].id + 1
+          }
+        }
+      });
   }
 
 }

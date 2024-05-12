@@ -1,4 +1,4 @@
-import { collection, collectionData, doc, DocumentData, Firestore, orderBy, query, setDoc } from '@angular/fire/firestore';
+import { collection, collectionData, doc, DocumentData, Firestore, limit, orderBy, query, setDoc } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -17,7 +17,17 @@ export class ChatService {
   getChats(): Observable<DocumentData> {
     const filteredQuery = query(
       this.chatCollection,
-      orderBy('date', 'asc'),
+      orderBy('id', 'asc'),
+    );
+
+    return collectionData(filteredQuery);
+  }
+
+  getLastChatId(): Observable<DocumentData> {
+    const filteredQuery = query(
+      this.chatCollection,
+      orderBy('id', 'desc'),
+      limit(1)
     );
 
     return collectionData(filteredQuery);
@@ -28,7 +38,8 @@ export class ChatService {
       email: chat.email,
       username: chat.username,
       message: chat.message,
-      date: new Date(),
+      date: chat.date,
+      id: chat.id
     });
   }
 }
