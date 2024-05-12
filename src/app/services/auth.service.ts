@@ -1,8 +1,10 @@
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User, UserCredential, getAuth } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User, getAuth, updateProfile } from '@angular/fire/auth';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
+import { onAuthStateChanged } from '@firebase/auth';
 
 import { UserInterface } from '../interfaces/user.interface';
+import { from, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -16,12 +18,18 @@ export class AuthService {
     private firestore: Firestore
   ) { }
 
-  register({ email, password }: UserInterface): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(this.firebaseAuth, email, password!)
+  register({ email, password, username }: UserInterface): Observable<void> {
+    const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password!)
+      .then(res => updateProfile(res.user, { displayName: username }))
+
+    return from(promise);
   }
 
-  login({ email, password }: UserInterface): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.firebaseAuth, email, password!)
+  login({ email, password }: UserInterface): Observable<void> {
+    const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password!)
+      .then(() => { });
+    this.saveLogin(email);
+    return from(promise);
   }
 
   logout(): Promise<void> {
@@ -33,7 +41,12 @@ export class AuthService {
     return auth.currentUser;
   }
 
-  saveLogin({ email }: User ) {
+  getCurrentUserApp(): void {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {});
+  }
+
+  private saveLogin(email: string) {
     setDoc(doc(this.userCollection), {
       user: email,
       date: new Date(),

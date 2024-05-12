@@ -75,28 +75,30 @@ export class LoginComponent {
     }
 
     this.authService.login(this.loginForm.value)
-      .then(res => {
-        Swal.fire({
-          title: "¡Usuario encontrado!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.authService.saveLogin(res.user);
-            this.loginForm.reset({ email: '', password: '' });
-            this.router.navigateByUrl('/home');
+      .subscribe({
+        next: (res) => {
+          Swal.fire({
+            title: "¡Usuario encontrado!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.loginForm.reset({ email: '', password: '' });
+              this.router.navigateByUrl('/home');
+            }
+          });
+        },
+        error: (err) => {
+          switch (err.code) {
+            case 'auth/invalid-credential':
+              this.errorMessage = 'Las credenciales son inválidas.'
+              break;
+            default:
+              this.errorMessage = err;
+              break;
           }
-        });
-      }).catch(err => {
-        switch (err.code) {
-          case 'auth/invalid-credential':
-            this.errorMessage = 'Las credenciales son inválidas.'
-            break;
-          default:
-            this.errorMessage = err;
-            break;
+          Swal.fire({
+            title: 'Error!', text: this.errorMessage, icon: 'error', confirmButtonText: 'Reintentar'
+          })
         }
-        Swal.fire({
-          title: 'Error!', text: this.errorMessage, icon: 'error', confirmButtonText: 'Reintentar'
-        })
       })
   }
 }

@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent {
   public registerForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -64,6 +65,35 @@ export class RegisterComponent {
     }
 
     this.authService.register(this.registerForm.value)
+      .subscribe({
+        next: () => {
+          Swal.fire({
+            title: "¡Usuario creado con éxito!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/home');
+            }
+          });
+        },
+        error: (err) => {
+          switch (err.code) {
+            case 'auth/email-already-in-use':
+              this.errorMessage = 'El correo ingresado ya se encuentra en uso.'
+              break;
+            default:
+              this.errorMessage = err;
+              break;
+          }
+
+          Swal.fire({
+            title: 'Error!', text: `Hubo un error al intentar crear el usuario.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
+          })
+
+          this.registerForm.reset({ email: '', password: '' });
+        }
+      })
+
+    /* this.authService.register(this.registerForm.value)
       .then(res => {
         Swal.fire({
           title: "¡Usuario creado con éxito!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
@@ -86,6 +116,6 @@ export class RegisterComponent {
           title: 'Error!', text: `Hubo un error al intentar crear el usuario.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
         })
       })
-    this.registerForm.reset({ email: '', password: '' });
+    this.registerForm.reset({ email: '', password: '' }); */
   }
 }

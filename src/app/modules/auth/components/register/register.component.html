@@ -8,6 +8,18 @@
         class="flex justify-center rounded-xl border-t-8 border-cyan-800 shadow-lg shadow-black">
         <div class="bg-slate-700 rounded-2xl flex justify-center w-1/2 mt-7">
           <div class="grid grid-rows-3 gap-5 w-full">
+
+            <div>
+              <p class="text-xl font-bold text-white">Nombre de Usuario</p>
+              <input type="email"
+                class="form-control shadow border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-800 focus:bg-white"
+                formControlName="username" placeholder="Escriba su nombre de usuario">
+
+              <span *ngIf="isValidField('username')" class="text-red-500">
+                {{ getFieldError('username') }}
+              </span>
+            </div>
+
             <div>
               <p class="text-xl font-bold text-white">Correo</p>
               <input type="email"
@@ -29,7 +41,6 @@
                 <label (click)="togglePassword()" [ngClass]="'hover:bg-blue-800 rounded px-2 py-2 text-white font-mono cursor-pointer select-none ' +
                     (showPassword ? 'bg-green-500' : 'bg-slate-400')">Mostrar</label>
               </div>
-
               <span *ngIf="isValidField('password')" class="text-red-500">
                 {{ getFieldError('password') }}
               </span>
