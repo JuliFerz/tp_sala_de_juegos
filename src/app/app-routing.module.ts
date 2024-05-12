@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
   },
+  {
+    path: 'chat',
+    loadChildren: () => import('./modules/chat/chat.module').then(m => m.ChatModule)
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

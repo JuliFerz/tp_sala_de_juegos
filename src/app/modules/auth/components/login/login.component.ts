@@ -86,9 +86,16 @@ export class LoginComponent {
           }
         });
       }).catch(err => {
-        this.errorMessage = err;
+        switch (err.code) {
+          case 'auth/invalid-credential':
+            this.errorMessage = 'Las credenciales son inválidas.'
+            break;
+          default:
+            this.errorMessage = err;
+            break;
+        }
         Swal.fire({
-          title: 'Error!', text: `Las credenciales son inválidas.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
+          title: 'Error!', text: this.errorMessage, icon: 'error', confirmButtonText: 'Reintentar'
         })
       })
   }
