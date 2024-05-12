@@ -12,12 +12,6 @@
   </div>
 
   <div class="flex flex-col justify-center text-center p-2 mt-5">
-    <!-- <button *ngFor="let item of menuItems"
-        class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4"
-        [routerLink]="[item.route]"
-        routerLinkActive="active">
-      <p class="text-2xl text-slate-200">{{ item.title }}</p>
-    </button> -->
     @if(authService.getCurrentUser() === null){
     <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="login" routerLinkActive="active">
       <p class="text-2xl text-slate-200">Conectarse</p>
@@ -30,7 +24,6 @@
     <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="chat" routerLinkActive="active">
       <p class="text-2xl text-slate-200">Chat Online</p>
     </button>
-    <!-- <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" routerLink="auth/logout" routerLinkActive="active"> -->
     <button class="bg-slate-800 hover:bg-slate-600 rounded-full p-3 mt-4" (click)="logout()">
       <p class="text-2xl text-slate-200">Desconectarse</p>
     </button>
