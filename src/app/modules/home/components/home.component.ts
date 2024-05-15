@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public email!: string;
 
   constructor(private authService: AuthService) { }
@@ -16,4 +16,7 @@ export class HomeComponent implements OnInit {
     this.email = this.authService.getCurrentUser()?.email!;
   }
 
+  ngOnDestroy(): void {
+    console.log('HomeComponent destroyed');
+  }
 }

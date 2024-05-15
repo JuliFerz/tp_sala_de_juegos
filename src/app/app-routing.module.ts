@@ -8,17 +8,22 @@ const routes: Routes = [
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
     path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     ...canActivate(() => redirectUnauthorizedTo(['auth']))
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule)
-  },
-  {
     path: 'chat',
     loadChildren: () => import('./modules/chat/chat.module').then(m => m.ChatModule),
+    ...canActivate(() => redirectUnauthorizedTo(['auth']))
+  },
+  {
+    path: 'games',
+    loadChildren: () => import('./modules/games/games.module').then(m => m.GamesModule),
     ...canActivate(() => redirectUnauthorizedTo(['auth']))
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

@@ -4,7 +4,7 @@
     <p class="text-white text-2xl font-bold select-none">Chat General - Sala de juegos</p>
   </div>
 
-  <div class="p-5 h-screen bg-slate-600 flex-row overflow-y-auto shadow-inner shadow-black">
+  <div class="p-5 h-screen bg-slate-600 flex-row overflow-y-auto scroll-smooth shadow-inner shadow-black">
 
     <div *ngFor="let chat of chats"
       [ngClass]="'pt-3 mx-5 flex ' + (userLogged.email === chat.email ? 'justify-end' : 'justify-start')">
