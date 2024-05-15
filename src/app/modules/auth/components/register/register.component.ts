@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    public spinnerService: SpinnerService,
   ) { }
 
 
@@ -64,9 +66,11 @@ export class RegisterComponent {
       return;
     }
 
+    this.spinnerService.show();
     this.authService.register(this.registerForm.value)
       .subscribe({
         next: () => {
+          this.spinnerService.hide();
           Swal.fire({
             title: "¡Usuario creado con éxito!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
           }).then((result) => {
@@ -92,30 +96,5 @@ export class RegisterComponent {
           this.registerForm.reset({ email: '', password: '' });
         }
       })
-
-    /* this.authService.register(this.registerForm.value)
-      .then(res => {
-        Swal.fire({
-          title: "¡Usuario creado con éxito!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigateByUrl('/home');
-          }
-        });
-      }).catch(err => {
-        switch (err.code) {
-          case 'auth/email-already-in-use':
-            this.errorMessage = 'El correo ingresado ya se encuentra en uso.'
-            break;
-          default:
-            this.errorMessage = err;
-            break;
-        }
-
-        Swal.fire({
-          title: 'Error!', text: `Hubo un error al intentar crear el usuario.\n${this.errorMessage}`, icon: 'error', confirmButtonText: 'Reintentar'
-        })
-      })
-    this.registerForm.reset({ email: '', password: '' }); */
   }
 }

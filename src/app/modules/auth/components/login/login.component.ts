@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    public spinnerService: SpinnerService,
   ) { }
 
 
@@ -74,9 +76,11 @@ export class LoginComponent {
       return;
     }
 
+    this.spinnerService.show();
     this.authService.login(this.loginForm.value)
       .subscribe({
         next: (res) => {
+          this.spinnerService.hide();
           Swal.fire({
             title: "¡Usuario encontrado!", text: "Accediendo al portal...", icon: "success", confirmButtonText: 'Continuar'
           }).then((result) => {
