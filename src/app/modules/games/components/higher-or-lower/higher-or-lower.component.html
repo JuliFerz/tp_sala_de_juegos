@@ -93,9 +93,8 @@
       </div>
     </div>
 
-    <img [src]="(
-      showCard ? guessCard.cards[0].image : '/assets/games/higher-or-lower/card.png'
-    )" class="w-52 h-64 rounded-2xl">
+    <img src="/assets/games/higher-or-lower/card.png" [ngClass]="'absolute w-52 h-64 rounded-2xl ' + (showCard ? 'z-10' : 'z-20')">
+    <img [src]="guessCard.cards[0].image" [ngClass]="'absolute w-52 h-64 rounded-2xl ' + (showCard ? 'z-20' : 'z-10')" *ngIf="guessCard">
   </div>
 
 
