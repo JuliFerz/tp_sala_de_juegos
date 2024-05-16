@@ -150,6 +150,7 @@ export class HigherOrLowerComponent implements OnInit {
       },
       error: (err) => console.log(err)
     })
+    this.onClickStartGame();
   }
 
   ngOnInit(): void {
