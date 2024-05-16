@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './components/chat/chat.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ChatComponent } from './components/chat/chat.component';
     CommonModule,
     ChatRoutingModule,
     ReactiveFormsModule,
+    SharedModule,
   ]
 })
 export class ChatModule { }

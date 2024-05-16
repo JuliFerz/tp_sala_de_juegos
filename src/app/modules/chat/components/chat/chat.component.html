@@ -1,5 +1,6 @@
 <div class="h-full rounded-2xl
   flex flex-col shadow-xl shadow-black">
+  <shared-spinner *ngIf="spinnerService.isLoading | async"></shared-spinner>
   <div class="bg-slate-700 p-5 h-16 flex items-center rounded-t-2xl shadow-inner shadow-black">
     <p class="text-white text-2xl font-bold select-none">Chat General - Sala de juegos</p>
   </div>

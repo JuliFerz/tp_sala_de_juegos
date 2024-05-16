@@ -5,6 +5,7 @@ import { Timestamp } from '@angular/fire/firestore';
 
 import { ChatInterface } from '../../../../interfaces/chat.interface';
 import { ChatService } from 'src/app/services/chat.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-chat',
@@ -21,7 +22,8 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private chatService: ChatService
+    private chatService: ChatService,
+    public spinnerService: SpinnerService
   ) { }
 
 
@@ -52,9 +54,11 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     getAuth().onAuthStateChanged(user => user ? this.userLogged = user : '');
+    this.spinnerService.show();
     this.chatService.getChats()
       .subscribe({
         next: (res) => {
+          this.spinnerService.hide();
           this.chats = res as ChatInterface[];
         }
       });
