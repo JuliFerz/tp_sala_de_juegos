@@ -122,6 +122,7 @@ export class HigherOrLowerComponent implements OnInit {
     }
 
     this.currentCard = this.guessCard;
+    this.spinnerService.show();
     this.cardService.drawCard(this.deck.deck_id, 1)
       .subscribe({
         next: (res) => {
