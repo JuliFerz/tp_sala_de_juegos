@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { getAuth, User } from '@angular/fire/auth';
+import { getAuth, User, provideAuth } from '@angular/fire/auth';
 import { Timestamp } from '@angular/fire/firestore';
 
 import { ChatInterface } from '../../../../interfaces/chat.interface';
@@ -28,9 +28,11 @@ export class ChatComponent implements OnInit {
   returnTimeString(dateString: string): string {
     const date = new Date(dateString);
 
-    const hora = date.getHours();
-    const minutos = date.getMinutes().toString().padStart(2, '0');
-    return `${hora}:${minutos}`;
+    const hour = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date.getMonth().toString().padStart(2, '0');
+    return `${day}/${month} (${hour}:${minutes})`;
   }
 
   onSendMessage(): void {
