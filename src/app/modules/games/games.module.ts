@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GamesRoutingModule } from './games-routing.module';
 import { HangmanComponent } from './components/hangman/hangman.component';
 import { HigherOrLowerComponent } from './components/higher-or-lower/higher-or-lower.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { HigherOrLowerComponent } from './components/higher-or-lower/higher-or-l
   ],
   imports: [
     CommonModule,
-    GamesRoutingModule
+    GamesRoutingModule,
+    SharedModule,
   ]
 })
 export class GamesModule { }

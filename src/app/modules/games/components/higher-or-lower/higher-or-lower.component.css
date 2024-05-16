@@ -1,0 +1,43 @@
+.scale-in-center{
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.blur-on {
+  animation-name: blur-on-animation;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+}
+
+@keyframes blur-on-animation {
+  0% {
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(10px);
+  }
+}
+
+.blur-off {
+  animation-name: blur-off-animation;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+
+@keyframes blur-off-animation {
+  0% {
+    filter: blur(10px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
